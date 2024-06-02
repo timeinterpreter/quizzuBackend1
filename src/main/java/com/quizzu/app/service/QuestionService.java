@@ -50,6 +50,15 @@ public class QuestionService {
     public List<Question> addQuestions(List<QuestionDto> questionDtos) throws Exception {
         List<Question> savedQuestions = new ArrayList<>();
 
+        Quiz quiz1 = this.quizRepository.findById((questionDtos.getFirst().getQuizId()))
+                .orElseThrow(() -> new ResourceNotFoundException("Quiz not found"));
+
+        if(questionDtos.size() != quiz1.getNoOfQuestions())
+        {
+            throw new Exception("No of questions in the questions array is " +
+                    "not equal to the no. of questions defined in the quiz");
+        }
+
         for (QuestionDto questionDto : questionDtos) {
             Quiz quiz = quizRepository.findById(questionDto.getQuizId())
                     .orElseThrow(() -> new ResourceNotFoundException("Quiz not found with id: " + questionDto.getQuizId()));
