@@ -38,4 +38,10 @@ public class QuizController {
     {
         return this.quizService.searchQuiz(searchQuery);
     }
+
+    @DeleteMapping("/{id}")
+    public String deleteQuiz(@PathVariable("id") Long id)
+    {
+        return this.quizService.deleteQuiz(id);
+    }
 }
