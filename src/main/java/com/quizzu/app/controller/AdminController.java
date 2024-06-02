@@ -12,10 +12,7 @@ import com.quizzu.app.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -42,6 +39,11 @@ public class AdminController {
     public ResponseEntity<Quiz> createQuiz(@RequestBody QuizDto quizDto) {
         System.out.println("error occurred");
         return ResponseEntity.ok(this.quizService.createQuiz(quizDto));
+    }
+
+    @DeleteMapping("/deleteQuiz/{id}")
+    public ResponseEntity<String> deleteQuiz(@PathVariable Long id) {
+        return ResponseEntity.ok(this.quizService.deleteQuiz(id));
     }
 
     @PostMapping("/createQuestion")

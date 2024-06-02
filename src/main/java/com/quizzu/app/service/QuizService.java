@@ -61,4 +61,10 @@ public class QuizService {
                 .filter(quiz -> !quiz.getQuestions().isEmpty())
                 .toList();
     }
+
+    public String deleteQuiz(Long id)
+    {
+        this.quizRepository.deleteById(id);
+        return "quiz deleted successfully";
+    }
 }
