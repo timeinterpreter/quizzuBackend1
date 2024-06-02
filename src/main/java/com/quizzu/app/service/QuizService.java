@@ -27,7 +27,7 @@ public class QuizService {
 
         quiz.setCategory(category);
         quiz.setTitle(quizDto.getTitle());
-        quiz.setTimeLimit(quizDto.getTimeLimit());
+        quiz.setNoOfQuestions(quizDto.getNoOfQuestions());
 
         return this.quizRepository.save(quiz);
     }

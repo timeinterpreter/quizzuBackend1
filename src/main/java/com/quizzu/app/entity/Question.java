@@ -22,7 +22,7 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "quiz_id")
-    @JsonBackReference
+    @JsonManagedReference
     private Quiz quiz;
 
     @OneToMany(mappedBy = "question")

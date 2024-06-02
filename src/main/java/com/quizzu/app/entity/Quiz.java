@@ -22,13 +22,13 @@ public class Quiz {
 
     private String title;
 
-    private int timeLimit;
+    private int noOfQuestions;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
     @OneToMany(mappedBy = "quiz")
-    @JsonManagedReference
+    @JsonBackReference
     private List<Question> questions;
 }

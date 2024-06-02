@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class QuizDto {
 
     private String title;
-    private int timeLimit;
+    private int noOfQuestions;
     private String category;
 }
