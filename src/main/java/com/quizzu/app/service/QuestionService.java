@@ -12,6 +12,7 @@ import com.quizzu.app.repo.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,6 +45,31 @@ public class QuestionService {
         }
 
         return savedQuestion;
+    }
+
+    public List<Question> addQuestions(List<QuestionDto> questionDtos) throws Exception {
+        List<Question> savedQuestions = new ArrayList<>();
+
+        for (QuestionDto questionDto : questionDtos) {
+            Quiz quiz = quizRepository.findById(questionDto.getQuizId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Quiz not found with id: " + questionDto.getQuizId()));
+
+            Question question = new Question();
+            question.setTitle(questionDto.getTitle());
+            question.setQuiz(quiz);
+            Question savedQuestion = questionRepository.save(question);
+            savedQuestions.add(savedQuestion);
+
+            for (AnswerDto answerDto : questionDto.getAnswers()) {
+                Answer answer = new Answer();
+                answer.setText(answerDto.getText());
+                answer.setCorrect(answerDto.getIsCorrect());
+                answer.setQuestion(savedQuestion);
+                answerRepository.save(answer);
+            }
+        }
+
+        return savedQuestions;
     }
 
     public List<Question> getAllQuestions(Long id) {

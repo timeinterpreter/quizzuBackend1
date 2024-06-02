@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/admin")
 @CrossOrigin
@@ -50,5 +52,11 @@ public class AdminController {
     public ResponseEntity<Question> createQuestion(@RequestBody QuestionDto questionDto) throws Exception
     {
         return ResponseEntity.ok(this.questionService.addQuestion(questionDto));
+    }
+
+    @PostMapping("/addQuestions")
+    public ResponseEntity<List<Question>> addQuestions(@RequestBody List<QuestionDto> questionDtos) throws Exception {
+        List<Question> questions = questionService.addQuestions(questionDtos);
+        return ResponseEntity.ok(questions);
     }
 }
