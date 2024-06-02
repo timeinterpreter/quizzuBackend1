@@ -40,13 +40,18 @@ public class QuizService {
                 .toList();
     }
 
-    public List<Quiz> getAllQuizzes()
+    public List<Quiz> getQuizzesHavingQuestions()
     {
         List<Quiz> quizList = this.quizRepository.findAll();
 
         return quizList.stream()
                 .filter(quiz -> !quiz.getQuestions().isEmpty())
                 .toList();
+    }
+
+    public List<Quiz> getAllQuizzes()
+    {
+        return this.quizRepository.findAll();
     }
 
     public List<Quiz> searchQuiz(String searchQuery)

@@ -28,6 +28,11 @@ public class QuizController {
         return this.quizService.getAllQuizzes();
     }
 
+    @GetMapping("/getQuizzesHavingQuestions")
+    public List<Quiz> getQuizzes() {
+        return this.quizService.getQuizzesHavingQuestions();
+    }
+
     @GetMapping("/searchQuiz")
     public List<Quiz> searchQuiz(@RequestParam String searchQuery)
     {
